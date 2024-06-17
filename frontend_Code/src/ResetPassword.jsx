@@ -1,21 +1,20 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { LockOutlined, UserOutlined, MailOutlined } from '@ant-design/icons';
+import { Link, useNavigate } from 'react-router-dom';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
-import { userRegister } from './APi'
+import { resetPassword } from './APi';
 
-function Register() {
+function ResetPassword() {
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const onFinish = async (values) => {
         console.log('Received values of form: ', values);
         try {
-            const response = await userRegister(values);
+            const response = await resetPassword(values);
             if (response.status === 200) {
-                console.log("result");
+                navigate('/')
                 return response.data;
-                navigate('/');
             }
         } catch (error) {
             console.log("Api call failed : ", error);
@@ -27,7 +26,7 @@ function Register() {
         <>
             <div className="container p-5 d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
                 <div className="card p-5" style={{ width: "25rem" }}>
-                    <h5 className="text-center pb-3">Register User</h5>
+                    <h5 className="text-center pb-3">Reset Password</h5>
                     <Form
                         name="normal_login"
                         className="login-form"
@@ -39,15 +38,15 @@ function Register() {
                         <div className="row mb-3">
                             <div className="col">
                                 <Form.Item
-                                    name="username"
+                                    name="token"
                                     rules={[
                                         {
                                             required: true,
-                                            message: 'Please enter your Username!',
+                                            message: 'Please enter your token!',
                                         },
                                     ]}
                                 >
-                                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Token" />
                                 </Form.Item>
                             </div>
                         </div>
@@ -55,32 +54,11 @@ function Register() {
                         <div className="row mb-3">
                             <div className="col">
                                 <Form.Item
-                                    name="email"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please enter your Email!',
-                                        },
-                                    ]}
-                                >
-                                    <Input
-                                        prefix={<MailOutlined className="site-form-item-icon" />}
-                                        type="email"
-                                        placeholder="Email"
-                                    />
-                                </Form.Item>
-                            </div>
-                        </div>
-
-
-                        <div className="row">
-                            <div className="col">
-                                <Form.Item
                                     name="password"
                                     rules={[
                                         {
                                             required: true,
-                                            message: 'Please input your Password!',
+                                            message: 'Please enter your New Password!',
                                         },
                                     ]}
                                 >
@@ -96,9 +74,30 @@ function Register() {
 
                         <div className="row">
                             <div className="col">
+                                <Form.Item
+                                    name="confirmPassword"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your Confirm Password!',
+                                        },
+                                    ]}
+                                >
+                                    <Input.Password
+                                        prefix={<LockOutlined className="site-form-item-icon" />}
+                                        type="password"
+                                        placeholder="Confirm Password"
+                                    />
+                                </Form.Item>
+                            </div>
+                        </div>
+
+
+                        <div className="row">
+                            <div className="col">
                                 <Form.Item>
                                     <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: "100%" }}>
-                                        SignUp
+                                        Reset Password
                                     </Button>
                                 </Form.Item>
                             </div>
@@ -110,4 +109,4 @@ function Register() {
     )
 }
 
-export default Register
+export default ResetPassword

@@ -7,11 +7,9 @@ function App() {
 
   return (
     <>
-     
-        
-     <AuthRouters>
-     <Login />
-     </AuthRouters>
+      <AuthRouters>
+        <Login />
+      </AuthRouters>
     </>
   )
 }
