@@ -59,19 +59,27 @@ router.post("/forget-password", async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
-                user: "sathish9585482928@gmail.com",
-                pass: "Jashikasri@123"
+                // Go to your Google account at https://myaccount.google.com/
+                // Go to Security
+                // Choose 2-Step Verification - here you have to verify yourself, in my case it was with phone number and a confirmation code send as text message.After that you will be able to enabled 2-Step Verification
+                // Visit https://myaccount.google.com/apppasswords to create your app.
+                // Put a name e.g.nodemailer to your app and create it.
+                // A modal dialog will appear with the password.Get that password and use it in your code.
+
+                // original password - Sathish199600@M
+                user: "sathish001996m@gmail.com",
+                pass: "wikblesusrhqhrlh"
             }
         })
         const msg = {
-            from: "sathish9585482928@gmail.com",
+            from: "sathish001996m@gmail.com",
             to: user.email,
             subject: "Password reset request",
             text: `You are receiving this email because you has requested a password reset for your account. \n\ Please use the following token to reset your password: ${token} \n\n If you didn't request a password reset, please ignore this email.`
         }
         transporter.sendMail(msg, (err, info) => {
             if (err) {
-                res.status(404).json({ message: "Somthing went wrong, pls try again !" })
+                res.status(404).json({ message: "Somthing went wrong, pls try again !" });
             }
             res.status(200).json({ message: "Email sent" + info.response })
         });
