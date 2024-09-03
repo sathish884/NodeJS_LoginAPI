@@ -6,7 +6,7 @@ const userShema = new mongoose.Schema({
     password: { type: String, required: true },
     confirmPassword: { type: String },
     resetPasswordToken: { type: String },
-    resetPasswordExpire: { type: Date }
+   // resetPasswordExpire: { type: Date }
 })
 
 const User = mongoose.model("User", userShema);
