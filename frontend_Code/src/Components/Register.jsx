@@ -7,6 +7,7 @@ function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState()
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -19,6 +20,7 @@ function Register() {
 
         } catch (err) {
             console.error('Registration Error:', err.response.data.message);
+            setError(err.response.data)
         }
     };
 
@@ -26,6 +28,11 @@ function Register() {
         <>
             <div className="container d-flex justify-content-center align-items-center p-3" style={{ minHeight: '100vh' }}>
                 <div className="row justify-content-center w-100">
+
+                    {error ? (<div className="alert alert-danger text-center" role="alert" style={{ maxWidth: '35rem', color:'red'}}>
+                        <b>{error.message}</b>
+                    </div>) : ""}
+
                     <div className="card p-5 mx-auto" style={{ maxWidth: '35rem' }}>
                         <h5 className='text-center'>Register</h5>
                         <form onSubmit={handleSubmit}>

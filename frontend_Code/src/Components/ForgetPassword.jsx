@@ -17,7 +17,7 @@ function ForgetPassword() {
             navigate('/verify-token');
         } catch (err) {
             console.error('Forgot Password Error:', err.response.data.message);
-            setError( err.response.data)
+            setError(err.response.data)
         }
     };
 
@@ -25,6 +25,9 @@ function ForgetPassword() {
         <>
             <div className="container d-flex justify-content-center align-items-center p-3" style={{ minHeight: '100vh' }}>
                 <div className="row justify-content-center w-100">
+                    {error ? (<div className="alert alert-danger text-center" role="alert" style={{ maxWidth: '35rem', color: 'red' }}>
+                        <b>{error.message}</b>
+                    </div>) : ""}
                     <div className="card p-5 mx-auto" style={{ maxWidth: '35rem' }}>
                         <h5 className='text-center'>Forgot Password</h5>
                         <form onSubmit={handleSubmit}>
@@ -34,7 +37,7 @@ function ForgetPassword() {
                                     <input type="email" className="form-control" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                                 </div>
                             </div>
-                            <p>{error && error.message}</p>
+
                             <div className="row mb-3">
                                 <div className="col-12">
                                     <button type='submit' className='btn btn-primary w-100'>Send Reset Link</button>

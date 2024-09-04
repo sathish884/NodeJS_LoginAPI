@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../APi';
 
@@ -6,6 +6,7 @@ function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState()
 
     const navigate = useNavigate()
 
@@ -25,13 +26,18 @@ function Login() {
             document.location.href = '/dashboard';
         } catch (err) {
             console.error('Login Error:', err.response.data.message);
+            setError(err.response.data)
         }
     };
 
     return (
         <>
-            <div className="container d-flex justify-content-center align-items-center p-3" style={{minHeight:'100vh'}}>
-                <div className="row justify-content-center w-100">
+            <div className="container d-flex justify-content-center align-items-center p-3" style={{ minHeight: '100vh' }}>
+                <div className="row d-flex justify-content-center align-items-center flex-md-column w-100">
+                    {error ? (<div className="alert alert-danger text-center" role="alert" style={{maxWidth:'35rem', color:'red'}}>
+                        <b>{error.message}</b>
+                    </div>) : ""}
+                    
                     <div className="card p-5 mx-auto" style={{ maxWidth: '35rem' }}>
                         <h5 className='text-center'>Sign in</h5>
                         <p className='text-center'>For security, please sign in to access your information</p>
@@ -69,7 +75,7 @@ function Login() {
                             <div className="row">
                                 <div className="col-12">
                                     <button type="button" className="btn btn-outline-secondary w-100">
-                                        <img src="imgs/google.webp" alt="Google" width={30} height={30} className="me-2" />
+                                        <img src="src/assets/google.webp" alt="Google" width={30} height={30} className="me-2" />
                                         <b>Google</b>
                                     </button>
                                 </div>

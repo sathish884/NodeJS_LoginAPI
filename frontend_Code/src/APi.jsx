@@ -54,9 +54,9 @@ export const tokenVerify = async (body) => {
 }
 
 // Reset password
-export const resetPassword = async ({ email, password, confirmpassword }) => {
+export const resetPassword = async ({ email, password }) => {
     try {
-        const response = await apiClient.post('/auth/reset-password', { email, password, confirmpassword });
+        const response = await apiClient.post('/auth/reset-password', { email, password });
         return response.data;
     } catch (error) {
         throw error;

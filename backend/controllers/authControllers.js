@@ -115,17 +115,13 @@ exports.tokenVerify = async (req, res) => {
 
 // Reset password
 exports.resetPassword = async (req, res) => {
-    const { email, password, confirmPassword } = req.body;
+    const { email, password } = req.body;
 
     try {
         const user = await User.findOne({ email });
 
         if (!user) {
             return res.status(404).json({ message: "User not found" });
-        }
-
-        if (password !== confirmPassword) {
-            return res.status(400).json({ message: "Passwords do not match" });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
