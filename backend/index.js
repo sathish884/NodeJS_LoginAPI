@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/routes");
+// Used to parse JSON payloads in incoming request
+// make it available in req.body 
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -14,6 +16,10 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+
+app.get("/", (req, res) => {
+    res.json({ message: "Password Reset flow Deployed Successfully" });
+})
 
 const PORT = process.env.PORT;
 
