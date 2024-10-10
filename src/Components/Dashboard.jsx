@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Dashboard() {
   return (
@@ -7,7 +8,8 @@ function Dashboard() {
         <div className="card p-5">
           <h3 className='text-center'>
             Welcome to the Dashboard
-          </h3>
+          </h3><br />
+          <Link to={'/'} style={{marginLeft:'auto', fontSize:'20px'}}>Logout</Link>
         </div>
 
       </div>
